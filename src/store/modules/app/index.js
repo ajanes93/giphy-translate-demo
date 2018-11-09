@@ -6,7 +6,7 @@ import uuid from "uuid";
 const namespaced = true;
 
 const initialState = () => ({
-  title: "Giphy Demo",
+  title: "Teen Tech Demo (07449575937)",
   responses: []
 });
 
