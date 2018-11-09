@@ -27,7 +27,7 @@
               v-if="image.data && Object.keys(image.data).length > 0"
             >
               From: {{ image.data.sender }}<br />
-              Body: {{ image.data.content }}
+              Message: {{ image.data.content }}
             </v-card-title>
           </v-card>
         </v-hover>
