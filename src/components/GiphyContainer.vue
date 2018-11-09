@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-sm fluid pa-0>
     <v-layout row wrap v-if="images && images.length > 0">
-      <v-flex v-for="image in images" :key="image.uuid" xs4 d-flex>
+      <v-flex v-for="image in images" :key="image.uuid" xs12 sm6 md4 lg3 d-flex>
         <v-hover>
           <v-card slot-scope="{ hover }">
             <v-img
