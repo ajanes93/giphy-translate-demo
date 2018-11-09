@@ -26,8 +26,10 @@
             <v-card-title
               v-if="image.data && Object.keys(image.data).length > 0"
             >
-              From: {{ image.data.sender }}<br />
-              Message: {{ image.data.content }}
+              <v-flex xs12 pa-0>
+                From: {{ image.data.sender.replace(/^.{6}/g, "******") }}
+              </v-flex>
+              <v-flex xs12 pa-0> Message: {{ image.data.content }} </v-flex>
             </v-card-title>
           </v-card>
         </v-hover>
