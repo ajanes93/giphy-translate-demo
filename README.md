@@ -1,6 +1,6 @@
-# GIPHY Demo (Using translate giphy endpoint and pusher-js)
+# GIPHY Demo 
 
-> A Vue.js project
+> A Vue.js project (Using translate giphy endpoint and pusher-js)
 
 ## Build Setup
 
