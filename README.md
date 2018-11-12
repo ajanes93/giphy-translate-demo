@@ -1,4 +1,4 @@
-# test-project
+# GIPHY Demo (Using translate giphy endpoint and pusher-js)
 
 > A Vue.js project
 
