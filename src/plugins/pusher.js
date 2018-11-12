@@ -1,5 +1,5 @@
 import Vue from "vue";
-import PusherMixin from "./pusher";
+import PusherMixin from "@/mixins/pusher";
 import Pusher from "pusher-js";
 
 export default {
