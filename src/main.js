@@ -3,7 +3,7 @@
 import Vue from "vue";
 import App from "./App";
 import Vuetify from "vuetify";
-import Pusher from "@/plugins/pusher.js";
+import Pusher from "pusher-plugin";
 import store from "./store";
 import "vuetify/dist/vuetify.min.css";
 
