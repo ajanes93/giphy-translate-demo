@@ -3,56 +3,48 @@ import _ from "underscore";
 export default {
   data() {
     return {
-      pusherChannel: {},
       pusherSubscriptions: []
     };
   },
   methods: {
-    subscribeToChannel(channel, events, callback) {
-      let vm = this;
+    subscribeToPusherChannel(channel) {
+      const vm = this;
 
-      if (vm.$pusher) {
-        let existingSubscription = vm.$pusher.channel(channel);
-
-        if (!existingSubscription) {
-          vm.pusherChannel = vm.$pusher.subscribe(channel);
-          vm.pusherSubscriptions.push(channel);
-        } else {
-          vm.pusherChannel = existingSubscription;
-        }
-
-        _.each(events, event => {
-          vm.pusherChannel.bind(event, data => {
-            callback(data);
-          });
-        });
+      if (vm.$pusher && !_.contains(vm.pusherSubscriptions, channel)) {
+        vm.$pusher.subscribe(channel);
+        vm.pusherSubscriptions.push(channel);
       }
     },
-    unsubscribeFromChannel(channel) {
-      let vm = this;
+    unsubscribeFromPusherChannel(channel) {
+      const vm = this;
 
-      if (vm.$pusher) {
-        if (channel) {
-          vm.unsubscribe(channel);
-          vm.pusherSubscriptions.splice(
-            _.indexOf(vm.pusherSubscriptions, channel),
-            1
-          );
-          return;
-        }
+      if (vm.$pusher && _.contains(vm.pusherSubscriptions, channel)) {
+        const subscription = vm.$pusher.channel(channel);
 
-        _.each(vm.pusherSubscriptions, (channel, i) => {
-          vm.unsubscribe(channel);
-        });
+        subscription.unsubscribe(channel);
+        subscription && subscription.unbind();
 
-        vm.pusherSubscriptions = [];
+        vm.pusherSubscriptions.splice(
+          _.indexOf(vm.pusherSubscriptions, channel),
+          1
+        );
       }
     },
-    unsubscribe(channel) {
-      let vm = this;
+    bindEventToPusherChannel(channel, event, callback) {
+      const vm = this;
 
-      vm.pusherChannel.unsubscribe(channel);
-      vm.pusherChannel && vm.pusherChannel.unbind();
+      if (vm.$pusher && _.contains(vm.pusherSubscriptions, channel)) {
+        const cb = data => callback(data);
+        vm.$pusher.channel(channel).bind(event, cb);
+      }
+    },
+    unbindEventFromPusherChannel(channel, event, callback = false) {
+      const vm = this;
+
+      if (vm.$pusher && _.contains(vm.pusherSubscriptions, channel)) {
+        const cb = callback ? data => callback(data) : callback;
+        vm.$pusher.channel(channel).unbind(event, cb);
+      }
     }
   }
 };

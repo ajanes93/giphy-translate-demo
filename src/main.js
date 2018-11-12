@@ -3,14 +3,9 @@
 import Vue from "vue";
 import App from "./App";
 import Vuetify from "vuetify";
-import Pusher from "pusher-js";
+import Pusher from "@/plugins/pusher.js";
 import store from "./store";
 import "vuetify/dist/vuetify.min.css";
-
-const pusher = new Pusher("1cb8378cb0b45470e0ec", {
-  cluster: "eu",
-  forceTLS: true
-});
 
 Vue.use(Vuetify, {
   theme: {
@@ -25,9 +20,7 @@ Vue.use(Vuetify, {
   }
 });
 
-Object.defineProperties(Vue.prototype, {
-  $pusher: { value: pusher }
-});
+Vue.use(Pusher, { pusherKey: "1cb8378cb0b45470e0ec" });
 
 Vue.config.productionTip = false;
 

@@ -56,7 +56,8 @@ export default {
     loading: false,
     search: "",
     attempts: 0,
-    maxAttempts: 10
+    maxAttempts: 10,
+    pusherChannel: "giphy_search"
   }),
   components: {
     GiphyContainer
@@ -100,12 +101,16 @@ export default {
   computed: mapGetters("app", ["images", "responses", "title"]),
   created() {
     const vm = this;
-    vm.subscribeToChannel("giphy_search", ["sms_search"], data => {
+
+    vm.subscribeToPusherChannel(vm.pusherChannel);
+    vm.bindEventToPusherChannel(vm.pusherChannel, "sms_search", data => {
       vm.handleTranslate(data.content, data);
     });
   },
   destroyed() {
-    this.resetApp();
+    const vm = this;
+    vm.unsubscribeFromChannel(vm.pusherChannel);
+    vm.resetApp();
   }
 };
 </script>
