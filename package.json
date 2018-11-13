@@ -15,7 +15,7 @@
   "dependencies": {
     "axios": "0.18.0",
     "pusher-js": "4.3.1",
-    "pusher-plugin": "0.0.4",
+    "pusher-plugin": "0.0.5",
     "underscore": "1.9.1",
     "uuid": "3.3.2",
     "vue": "^2.5.2",
