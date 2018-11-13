@@ -1,5 +1,7 @@
 {
   "name": "giphy-demo",
+  "author": "Andres Janes <dev@andresjanes.com>",
+  "license": "MIT",
   "version": "1.0.0",
   "description": "Uses Giphy API to translate search into a giphy.  Also hooked up to pusher.",
   "main": "src/main.js",
